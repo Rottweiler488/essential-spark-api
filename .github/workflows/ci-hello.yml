@@ -1,4 +1,4 @@
-name: CI app
+name: CI Hello app
 
 on:
   push:
@@ -6,9 +6,20 @@ on:
       - main
       - feature/**
       - fix/**
-    paths-ignore:
+    paths:
+      - 'ci-hello.yml'
+      - 'src/main/java/com/rottweiler488/essentialspark/hello'
+      - 'src/main/java/com/rottweiler488/essentialspark/EssentialSparkApplication.java'
+      - 'src/main/resources/application.yml'
+      - 'src/test/'
+      - 'build.gradle.kts'
+      - 'settings.gradle.kts'
+      - 'gradle/**'
+      - 'config/**'
+    //paths-ignore:
       - 'LICENSE'
       - '**.md'
+      - 'src/main/java/com/rottweiler488/essentialspark'
   pull_request:
     branches:
       - main
