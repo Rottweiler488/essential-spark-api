@@ -7,8 +7,8 @@ on:
       - feature/**
       - fix/**
     paths:
-      - 'ci-hello.yml'
-      - 'src/main/java/com/rottweiler488/essentialspark/hello'
+      - '.github/workflows/ci-hello.yml'
+      - 'src/main/java/com/rottweiler488/essentialspark/hello/**'
       - 'src/main/java/com/rottweiler488/essentialspark/EssentialSparkApplication.java'
       - 'src/main/resources/application.yml'
       - 'src/test/**'
