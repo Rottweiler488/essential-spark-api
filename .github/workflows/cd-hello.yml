@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
 
     if: |
-      github.event_name == 'workflow_dispacth' || github.event.workflow_run.conclusion == 'success'
+      github.event_name == 'workflow_dispatсh' || github.event.workflow_run.conclusion == 'success'
 
     steps:
       - name: Checkout code
@@ -39,7 +39,7 @@ jobs:
         with:
           name: application
           path: build/libs/
-          run-id: ${{ github.event.workflow_run.id }}
+          run-id: ${{ github.event_name == 'workflow_dispatch' && inputs.run_id || github.event.workflow_run.id }}
           github-token: ${{ secrets.TOKEN_GITHUB }}
 
       - name: Copy JAR
