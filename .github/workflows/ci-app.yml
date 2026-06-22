@@ -72,4 +72,4 @@ jobs:
           cache-read-only: ${{ github.ref != 'refs/heads/main' }}
 
       - name: Build
-        rund: ./gradlew build -x check --build-cache
+        run: ./gradlew build -x check --build-cache
