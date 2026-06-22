@@ -16,10 +16,6 @@ on:
       - 'settings.gradle.kts'
       - 'gradle/**'
       - 'config/**'
-    //paths-ignore:
-      - 'LICENSE'
-      - '**.md'
-      - 'src/main/java/com/rottweiler488/essentialspark'
   pull_request:
     branches:
       - main
