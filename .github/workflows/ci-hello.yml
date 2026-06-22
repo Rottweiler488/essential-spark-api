@@ -11,7 +11,7 @@ on:
       - 'src/main/java/com/rottweiler488/essentialspark/hello'
       - 'src/main/java/com/rottweiler488/essentialspark/EssentialSparkApplication.java'
       - 'src/main/resources/application.yml'
-      - 'src/test/'
+      - 'src/test/**'
       - 'build.gradle.kts'
       - 'settings.gradle.kts'
       - 'gradle/**'
