@@ -22,6 +22,14 @@ checkstyle {
 	toolVersion = "13.6.0"
 }
 
+tasks.named<Checkstyle>("checkstyleMain") {
+	configFile = file("config/checkstyle/checkstyle.xml")
+}
+
+tasks.named<Checkstyle>("checkstyleTest") {
+	configFile = file("config/checkstyle/checkstyle-test.xml")
+}
+
 tasks.test {
 	useJUnitPlatform()
 }
