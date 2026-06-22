@@ -81,7 +81,7 @@ jobs:
       - name: Build
         run: ./gradlew build -x check --build-cache
 
-      - name: Upload Jar
+      - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
           name: application
