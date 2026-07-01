@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - feature/**
-      - fix/**
+      - hotfix/**
     paths:
       - '.github/workflows/ci-hello.yml'
       - 'src/main/java/com/rottweiler488/essentialspark/hello/**'
@@ -20,7 +20,7 @@ on:
     branches:
       - main
       - feature/**
-      - fix/**
+      - hotfix/**
 
 jobs:
   lint:
@@ -85,5 +85,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: application
-          path: build/libs/*.jar
+          path: build/libs/esapp-latest.jar
           retention-days: 2

@@ -49,7 +49,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          source: "build/libs/*.jar"
+          source: "build/libs/esapp-latest.jar"
           target: "/opt/essential-spark"
           strip_components: 2
 
@@ -60,6 +60,4 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          script: |
-            mv /opt/essential-spark/*.jar /opt/essential-spark/esapp.jar
-            sudo systemctl restart essential-spark
+          script: sudo systemctl restart essential-spark

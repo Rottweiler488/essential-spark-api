@@ -34,6 +34,10 @@ tasks.test {
 	useJUnitPlatform()
 }
 
+tasks.bootJar {
+	archiveFileName.set("esapp-latest.jar");
+}
+
 tasks.jar {
 	enabled = false
 }
