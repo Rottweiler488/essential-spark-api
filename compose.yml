@@ -1,0 +1,7 @@
+services:
+  esapp:
+    image: rottweiler488/essential-spark:latest
+    container_name: essential-spark
+    restart: unless-stopped
+    ports:
+      - "7132:7132"
