@@ -2,11 +2,14 @@ plugins {
 	java
 	id("org.springframework.boot") version "3.5.3"
 	id("io.spring.dependency-management") version "1.1.7"
+    id("com.palantir.git-version") version "5.0.0"
 	checkstyle
 }
 
 group = "com.rottweiler488"
-version = "0.1.0-SNAPSHOT"
+
+val gitVersion: groovy.lang.Closure<String> by extra
+version = gitVersion.invoke()
 
 repositories {
 	mavenCentral()
@@ -32,10 +35,6 @@ tasks.named<Checkstyle>("checkstyleTest") {
 
 tasks.test {
 	useJUnitPlatform()
-}
-
-tasks.bootJar {
-	archiveFileName.set("esapp-latest.jar");
 }
 
 tasks.jar {

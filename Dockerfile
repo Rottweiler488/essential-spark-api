@@ -1,9 +1,28 @@
-FROM eclipse-temurin:21-jre
+#stage 1: build
+FROM eclipse-temurin:21-jdk-alpine AS builder
+
+WORKDIR /workapp
+
+COPY gradlew .
+COPY gradle gradle
+COPY build.gradle.kts settings.gradle.kts ./
+
+RUN ./gradlew dependencies --no-daemon
+
+COPY src src
+
+RUN ./gradlew bootJar --no-daemon
+
+#stage 2: run
+FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
-COPY build/libs/*.jar app.jar
+RUN addgroup -S dockeruser && adduser -S dockeruser -G dockeruser
+USER dockeruser:dockeruser
 
-EXPOSE 8080
+COPY --from=builder /workapp/build/libs/essential-spark-*.jar app.jar
+
+EXPOSE 7132
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
