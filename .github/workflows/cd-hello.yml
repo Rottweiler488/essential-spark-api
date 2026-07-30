@@ -51,7 +51,7 @@ jobs:
         with:
           images: ${{ secrets.DOCKER_USERNAME }}/essential-spark
           tags: |
-            type=raw,value=latest,enable=${{ github.event.workflow_run.head_branch == "main" || github.ref == "refs/heads/main" }}
+            type=raw,value=latest,enable=${{ github.event.workflow_run.head_branch == 'main' || github.ref == 'refs/heads/main' }}
             type=sha,format=short,prefix=
             type=semver,pattern={{version}}
 
