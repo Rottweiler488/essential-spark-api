@@ -1,1 +1,1 @@
-rootProject.name = "essential-spark-api"
+rootProject.name = "essential-spark"

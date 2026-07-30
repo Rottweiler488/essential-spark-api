@@ -6,6 +6,8 @@ on:
       - "CI Hello app"
     types:
       - completed
+    branches:
+      - main
 
   workflow_dispatch:
     inputs:
@@ -33,14 +35,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Download JAR
-        uses: actions/download-artifact@v4
         with:
-          name: application
-          path: build/libs/
-          run-id: ${{ github.event_name == 'workflow_dispatch' && inputs.run_id || github.event.workflow_run.id }}
-          github-token: ${{ secrets.TOKEN_GITHUB }}
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: Login in Docker Hub
         uses: docker/login-action@v3
@@ -48,12 +45,23 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ secrets.DOCKER_USERNAME }}/essential-spark
+          tags: |
+            type=raw,value=latest,enable=${{ github.event.workflow_run.head_branch == "main" || github.ref == "refs/heads/main" }}
+            type=sha,format=short,prefix=
+            type=semver,pattern={{version}}
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/essential-spark:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
       - name: Deploy
         uses: appleboy/ssh-action@v1.2.0
@@ -63,5 +71,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
+            cd /opt/essential-spark
             docker compose pull
             docker compose up -d
