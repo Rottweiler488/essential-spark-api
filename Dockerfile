@@ -6,6 +6,7 @@ WORKDIR /workapp
 COPY gradlew .
 COPY gradle gradle
 COPY build.gradle.kts settings.gradle.kts ./
+COPY .git .git
 
 RUN ./gradlew dependencies --no-daemon
 
