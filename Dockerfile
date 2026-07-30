@@ -3,6 +3,8 @@ FROM eclipse-temurin:21-jdk-alpine AS builder
 
 WORKDIR /workapp
 
+RUN apk add --no-cache git
+
 COPY gradlew .
 COPY gradle gradle
 COPY build.gradle.kts settings.gradle.kts ./
