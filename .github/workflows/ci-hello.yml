@@ -2,7 +2,7 @@ name: CI Hello app
 
 on:
   push:
-    branches:
+    branches: &shared_branches
       - main
       - feature/**
       - hotfix/**
@@ -17,10 +17,7 @@ on:
       - 'gradle/**'
       - 'config/**'
   pull_request:
-    branches:
-      - main
-      - feature/**
-      - hotfix/**
+    branches: *shared_branches
     paths: *shared_paths
 
 jobs:
